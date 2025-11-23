@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tugas8h1d023066/ui/login_page.dart';
 import 'ui/produk_page.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Toko Kita',
       debugShowCheckedModeBanner: false,
-      home: ProdukPage(),
+      home: LoginPage(),
     );
   }
 }
