@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import '../bloc/produk_bloc.dart';
 import '../model/produk.dart';
 import 'produk_form.dart';
+import 'produk_page.dart';
+import '../widget/warning_dialog.dart';
 
 // ignore: must_be_immutable
 class ProdukDetail extends StatefulWidget {
@@ -72,7 +75,24 @@ class _ProdukDetailState extends State<ProdukDetail> {
       actions: [
         OutlinedButton(
           child: const Text("Ya"),
-          onPressed: () {},
+          onPressed: () async {
+            try {
+              await ProdukBloc.deleteProduk(id: int.parse(widget.produk!.id!));
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const ProdukPage(),
+                ),
+              );
+            } catch (error) {
+              Navigator.pop(context);
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => const WarningDialog(
+                  description: "Hapus gagal, silahkan coba lagi",
+                ),
+              );
+            }
+          },
         ),
         OutlinedButton(
           child: const Text("Batal"),
@@ -80,6 +100,7 @@ class _ProdukDetailState extends State<ProdukDetail> {
         )
       ],
     );
+
     showDialog(builder: (context) => alertDialog, context: context);
   }
 }

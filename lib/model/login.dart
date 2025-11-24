@@ -15,11 +15,12 @@ class Login {
 
   factory Login.fromJson(Map<String, dynamic> obj) {
     if (obj['code'] == 200) {
+      var userId = obj['data']['user']['id'];
       return Login(
         code: obj['code'],
         status: obj['status'],
         token: obj['data']['token'],
-        userID: int.parse(obj['data']['user']['id']),
+        userID: userId is int ? userId : int.parse(userId.toString()),
         userEmail: obj['data']['user']['email'],
       );
     } else {
