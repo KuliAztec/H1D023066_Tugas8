@@ -23,6 +23,41 @@
 - _menuRegistrasi(): Link navigasi ke halaman registrasi
 ```
 
+**Pop-up Login:**
+
+![Popup Login Berhasil](screenshots/kedua/login.png)
+
+**Penjelasan:**
+Pop-up dialog yang muncul setelah proses login. Dialog menampilkan pesan sukses atau gagal berdasarkan response dari API.
+
+**Kode:**
+```dart
+// Di dalam _buttonLogin() method
+WarningDialog(
+    description: "Login berhasil",
+).then((value) {
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const ProdukPage(),
+        ),
+    );
+});
+
+// Atau untuk login gagal
+showDialog(
+    context: context,
+    builder: (BuildContext context) => const WarningDialog(
+        description: "Login gagal, periksa email dan password",
+    ),
+);
+```
+
+**Komponen:**
+- WarningDialog: Widget custom untuk menampilkan alert
+- description: Parameter pesan yang ditampilkan
+- Navigator.pushReplacement: Navigasi ke ProdukPage setelah login berhasil
+
 ---
 
 ### 2. Halaman Registrasi
